@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 import com.google.gson.Gson;
@@ -19,7 +20,7 @@ import model.Pais;
  * -Lista de continentes
  * -Lista de paises a partir del continente
  * -Pais más poblado 
- * -Tabla con paises agurpados por continente
+ * -Tabla con paises agrupados por continente
  * -Pais a partir de su capital  
  */
 public class PaisesService {
@@ -44,9 +45,14 @@ String dir= ("C:\\Users\\manana\\Curso Java\\Java2024\\ficheros\\paises.json");
 				.toList();
 	}
 //	-Lista de paises a partir del continente
-	public List<String> listadoPorContinente(String continente) {
+	public List<Pais> listadoPaisPorContinente(String continente) {
 		return getPaises()
 				.filter(c->c.getContinente().equals(continente))
 				.toList();
+	}
+	// Tabla con paises agrupados por continente
+	public Map<String, List<Pais>> listadoPorContinente(String continente) {
+		return getPaises()
+				.
 	}
 	}
