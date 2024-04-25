@@ -78,12 +78,11 @@ public class PedidosMenu {
 		System.out.println("Fecha límite (dia/mes/año):");
 		LocalDate fecha2=LocalDate.parse(sc.nextLine(),sdf);	
 		List<Pedido> pedidosEncontrados=service.pedidosEntreFechas(fecha1, fecha2);
-		pedidosEncontrados.forEach(p->{
-				System.out.print("Producto: "+p.getProducto()+" ");
-				System.out.print("Unidades: "+p.getUnidades()+" ");
-				System.out.println("Fecha pedido: "+p.getFechaPedido().format(sdf)+" ");
-			});
-		
+		for(Pedido p:pedidosEncontrados) {
+			System.out.print("Producto: "+p.getProducto()+" ");
+			System.out.print("Unidades: "+p.getUnidades()+" ");
+			System.out.println("Fecha pedido: "+p.getFechaPedido().format(sdf)+" ");
+		}
 	}
 
 }
