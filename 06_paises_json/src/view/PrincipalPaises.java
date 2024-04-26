@@ -91,7 +91,9 @@ public class PrincipalPaises {
 	
 	// -Tabla con paises agrupados por continente
 	public static void paisesPorContinentes() {
-//		service.listadoPorContinentes().
+		
+		service.listadoPorContinentes()
+			Map<String, List<Pais>> listado= service.listadoPorContinentes()
 			
 	}
 	

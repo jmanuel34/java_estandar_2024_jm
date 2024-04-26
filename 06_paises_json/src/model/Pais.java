@@ -20,12 +20,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Data
 public class Pais {
-	@SerializedName(value="name")
+	@SerializedName("name")
 	private String nombre;
 	private String capital;
 	@SerializedName(value="region")	
 	private String continente;
 	@SerializedName(value="population")
-	private int habitantes;
+	private long habitantes;
 
 }
