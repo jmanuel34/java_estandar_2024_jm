@@ -56,3 +56,37 @@ public class EmpleadosService {
 				.toList();
 	}
 }
+/*
+package servicios;
+
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
+
+import modelos.Curso;
+
+public class CursosJsonService {
+	
+	private Gson gson = new Gson();
+	private String ficheroCursos = "cursos.json";
+	
+	public List<Curso> getCursos() {
+		List<Curso> cursos = new ArrayList<Curso>();
+		TypeToken<List<Curso>> typeTokenListaCursos = new TypeToken<List<Curso>>() {};
+		try {
+			return gson.fromJson(new FileReader(ficheroCursos), typeTokenListaCursos);
+		} catch (JsonIOException | JsonSyntaxException | FileNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return cursos;
+	}
+} 
+
+//*/
