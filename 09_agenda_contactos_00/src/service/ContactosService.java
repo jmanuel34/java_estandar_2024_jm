@@ -66,7 +66,29 @@ public class ContactosService {
 		}
 	}
 	
-	
+	//Buscar contacto por su clave primaria
+	public Contacto buscarContactoPorId(int idContacto) {
+		try(Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){		
+			String sql="select * from contactos where idContacto=?";
+			PreparedStatement st=con.prepareStatement(sql);
+			st.setInt(1, idContacto);
+			ResultSet rs=st.executeQuery();
+			//debemos movernos a la primera y única fila, para poder extraer
+			//el valor de dicha fila
+			if(rs.next()) {
+				return new Contacto(rs.getInt("idContacto"),
+							rs.getString("nombre"),
+							rs.getString("email"),
+							rs.getInt("edad"));
+			}
+				
+			return null;
+		}catch(SQLException ex) {
+			ex.printStackTrace();
+			return null;
+		}
+		
+	}
 	//Recuperar todos los contactos
 	public List<Contacto> getContactos(){
 		List<Contacto> contactos=new ArrayList<Contacto>();
@@ -87,34 +109,12 @@ public class ContactosService {
 		}
 		return contactos;
 	}
-	
 	//Buscar contacto por su email
 		private Contacto existeContactoPorEmail(String email) {
 			try(Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){		
 				String sql="select * from contactos where email=?";
 				PreparedStatement st=con.prepareStatement(sql);
 				st.setString(1, email);
-				ResultSet rs=st.executeQuery();
-				//debemos movernos a la primera y única fila, para poder extraer
-				//el valor de dicha fila
-				if(rs.next()) {
-					return new Contacto(rs.getInt("idContacto"),
-								rs.getString("nombre"),
-								rs.getString("email"),
-								rs.getInt("edad"));
-				}				
-				return null;
-			}catch(SQLException ex) {
-				ex.printStackTrace();
-				return null;
-			}		
-		}
-		//Buscar contacto por su clave primaria
-		public Contacto buscarContactoPorId(int idContacto) {
-			try(Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){		
-				String sql="select * from contactos where idContacto=?";
-				PreparedStatement st=con.prepareStatement(sql);
-				st.setInt(1, idContacto);
 				ResultSet rs=st.executeQuery();
 				//debemos movernos a la primera y única fila, para poder extraer
 				//el valor de dicha fila

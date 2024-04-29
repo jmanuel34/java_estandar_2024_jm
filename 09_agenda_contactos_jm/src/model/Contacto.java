@@ -12,4 +12,10 @@ public class Contacto {
 	private String nombre;
 	private String email;
 	private int edad;
+
+	public Contacto(String nombre, String email, int edad) {
+		this.nombre= nombre;
+		this.email= email;
+		this.edad=edad;
+	}
 }
