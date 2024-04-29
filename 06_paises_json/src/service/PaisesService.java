@@ -27,9 +27,8 @@ import model.Pais;
  * -Pais a partir de su capital  
  */
 public class PaisesService {
-//	String dir = ("/Users/josemanuelmendez/eclipse-workspace/cursoJava2024/ficheros/paises.json");
-
-	String dir = ("C:\\Users\\manana\\Curso Java\\Java2024\\ficheros\\paises.json");
+	String dir = ("/Users/josemanuelmendez/eclipse-workspace/cursoJava2024/ficheros/paises.json");
+//	String dir = ("C:\\Users\\manana\\Curso Java\\Java2024\\ficheros\\paises.json");
 
 	public Stream<Pais> getPaises() {
 		try {
@@ -71,11 +70,11 @@ public class PaisesService {
 	}
 	
 	// -Pais a partir de su capital  
-	public String getPaisporCapital(String capital) {
+	public Optional<String> getPaisporCapital(String capital) {
 		return getPaises()
 				.filter(p->p.getCapital()!=null && p.getCapital().equals(capital))
 				.findFirst()	//Optional<Pais>
-				.map(p->p.getNombre())	//Optional<String>
-				.orElse("");			
+				.map(p->p.getNombre());	//Optional<String>
+						
 	}
 }

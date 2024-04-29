@@ -1,9 +1,10 @@
 package view;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
+import model.Pais;
 import service.PaisesService;
 
 /*
@@ -56,6 +57,7 @@ public class PrincipalPaises {
 		}while(opcion!=6);
 
 	}
+	
 	static void presentarMenu() {
 		System.out.println("""
 				1.- Lista de continentes
@@ -77,7 +79,8 @@ public class PrincipalPaises {
 		String continente;
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Introduzca el continente: ");
-		continente = sc.nextLine();	
+		continente = sc.nextLine();
+		sc.close();
 		service.paisesEnContinente(continente)
 			.stream()
 			.forEach(c->System.out.println(c.getNombre()));
@@ -92,10 +95,16 @@ public class PrincipalPaises {
 	// -Tabla con paises agrupados por continente
 	public static void paisesPorContinentes() {
 		
-		service.listadoPorContinentes()
-			Map<String, List<Pais>> listado= service.listadoPorContinentes()
-			
+			Map<String, List<Pais>> tabla = service.listadoPorContinentes();
+				tabla.forEach((k,v) -> {
+					System.out.println();
+					System.out.println("----- Continente: "
+							+ ""+ k+ "---------");
+					
+					v.forEach(p->System.out.println(p.getNombre()));
+				});	
 	}
+				
 	
 //	-Pais a partir de su capital  
 	public static void paisPorCapital() {
@@ -103,12 +112,10 @@ public class PrincipalPaises {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Introduzca la capital: ");
 		capital = sc.nextLine();
+		sc.close();		
 		service.getPaisporCapital(capital)
 			.ifPresentOrElse(p->{
-				System.out.println(p.getNombre()+" ");
-				System.out.println(p.getCapital()+ " ");
-				System.out.println(p.getContinente());
-				System.out.println(p.getHabitantes());
+				System.out.println(p);
 			}, ()->System.out.println("No existe pais con esa capital"));
 			
 	}

@@ -1,7 +1,5 @@
 package service;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -10,10 +8,11 @@ import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import model.Pedido;
 import utilidades.Util;
+import exceptions.ErrorFuenteDatosException;
+
 
 public class PedidosService {
 	Path pt=Path.of("pedidos.csv");
@@ -41,51 +40,72 @@ public class PedidosService {
 		nuevoPedido(p);
 	}
 	
-	public Optional<Pedido> pedidoMasReciente() {
-		
+	public Pedido pedidoMasReciente() {	
 		try {
 			return Files.lines(pt)
-					.map(p->Util.convertirCadenaAPedido(p))//Stream<String>
-					.max(Comparator.comparing(p->p.getFechaPedido()));
+					.map(p->Util.convertirCadenaAPedido(p)) 	//Stream<String>
+					.max(Comparator.comparing(p->p.getFechaPedido()))
+					.orElse(null);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			
+			throw ErrorFuenteDatosException();			
 		}
 				
 	}
 	
 	public List<Pedido> pedidosEntreFechas(LocalDate f1, LocalDate f2) {
-		return Files.lines(pt)
-				.filter((Pedido) p-> Util.convertirCadenaApedido(p). getFechaPedido().isAfter(f1) &&
-						p->Util.convertirCadenaAPedido(p).getFechaPedido().isBefore(f2))
-				.toList();
+		try {
+			return Files.lines(pt)
+					.map(Util::convertirCadenaAPedido)
+					.filter(p -> p.getFechaPedido().isAfter(f1) &&
+								 p.getFechaPedido().isBefore(f2))
+					.toList();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
 	}
 	
 	public Pedido pedidoProximoFecha(LocalDate fecha) {
 		Pedido pAux=new Pedido();
 		pAux.setFechaPedido(LocalDate.of(1, 1, 1));
-		try(FileReader fr=new FileReader(fichero);
-				BufferedReader bf=new BufferedReader(fr);){
-			String linea;
-			while((linea=bf.readLine())!=null) {
-				Pedido p=Util.convertirCadenaAPedido(linea);
-				if(Math.abs(ChronoUnit.DAYS.between(p.getFechaPedido(), fecha))<
-						Math.abs(ChronoUnit.DAYS.between(pAux.getFechaPedido(), fecha))) {
-					pAux=p;
-				}
-			}
-		}
-		catch(IOException ex) {
-			ex.printStackTrace();
-		}
-		return pAux;
+			try {
+				return Files.lines(pt)
+					.map(Util::convertirCadenaAPedido)
+					.min(Comparator.comparingLong(p->Math.abs(ChronoUnit.DAYS.between(p.getFechaPedido(), fecha))))
+					.orElse(null);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				return null;
+			}				
 	}
 	
 	public void eliminarPedido(String producto) {
-		
+		try {
+			List<String> pedidos = Files.lines(pt)
+									.map(Util::convertirCadenaAPedido)
+									.filter(p->!p.getProducto().equals(producto))
+									.map(Util::convertirPedidoACadena)
+									.toList();
+			Files.write(pt, pedidos);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+					
 	}
 	public List<Pedido> pedidos(){
+		try {
+			return Files.lines(pt)
+					.map(Util::convertirCadenaAPedido)
+					.toList();
+		} catch (IOException e) {
+			e.printStackTrace();
+			return null;
+		}
 		
 	}
 }

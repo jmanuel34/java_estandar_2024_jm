@@ -1,20 +1,15 @@
 package service;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+import exceptions.ErrorFuenteDatosException;
 import model.Pedido;
 import utilidades.Util;
 
@@ -89,9 +84,9 @@ public class PedidosService {
 	public void eliminarPedido(String producto) {
 		try {
 			List<String> pedidos= Files.lines(pt)
-					.map(Util::convertirCadenaAPedido)//Stream<Pedido>
-					.filter(p->!p.getProducto().equals(producto))//Stream<Pedido>
-					.map(Util::convertirPedidoACadena)//Stream<String>
+					.map(Util::convertirCadenaAPedido)				//Stream<Pedido>
+					.filter(p->!p.getProducto().equals(producto))	//Stream<Pedido>
+					.map(Util::convertirPedidoACadena)				//Stream<String>
 					.toList();
 			Files.write(pt, pedidos);
 		}
@@ -103,12 +98,13 @@ public class PedidosService {
 	public List<Pedido> pedidos(){
 		try {
 			return Files.lines(pt)
-					.map(Util::convertirCadenaAPedido)//Stream<Pedido>
+					.map(Util::convertirCadenaAPedido)				//Stream<Pedido>
 					.toList();
 		}
 		catch(IOException ex) {
 			ex.printStackTrace();
-			return null;
+			throw new ErrorFuenteDatosException();
+			
 		}
 	}
 }

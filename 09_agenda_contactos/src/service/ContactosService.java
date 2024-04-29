@@ -18,36 +18,63 @@ import model.Contacto;
  */
 public class ContactosService {
 	String cadenaConexion = "jdbc:mysql://localhost:3306/agenda";
-	String usuario= "root";
-	String password = "root";
-/*	
-	private Connection getConexion() {
-		String cadenaConexion = "jdbc:mysql://localhost:3306/agenda";
-		String usuario= "root";
-		String password = "root";
-		try(Connection con=DriverManager.getConnection(cadenaConexion, usuario, password);
-	}
-//*/	
-	public agregar(Contacto contacto) {
-		try(Connection con=DriverManager.getConnection(cadenaConexion, usuario, password);){
-					
-					String sql="insert into contactos(nombre, email, edad) values(?,?,?)";
-					PreparedStatement ps=con.prepareStatement(sql);
-					//sustituir parametros por valores
-					ps.setString(1, contacto.getNombre());
-					ps.setString(2, contacto.getEmail());
-					ps.setInt(3, contacto.getEdad());
-					ps.execute();			//No se manda otra vez la Sql
-		/*
-					String sql="insert into contactos(nombre, email, edad) values('"+name+","+ email, edad)";
-					Statement st=con.createStatement();
-					st.execute(sql);
-		//*/
-					System.out.println("Registro añadido");
-				}catch (SQLException ex) {
-					ex.printStackTrace();
-				}
-				
-			}
+	String usuario = "root";
+	String password = "rootroot";
 
+	/*
+	 * private Connection getConexion() { String cadenaConexion =
+	 * "jdbc:mysql://localhost:3306/agenda"; String usuario= "root"; String password
+	 * = "root"; try(Connection con=DriverManager.getConnection(cadenaConexion,
+	 * usuario, password); } //
+	 */
+	
+	// 1.-Nuevo Contacto
+	public void agregar(Contacto contacto) {
+		try (Connection con = DriverManager.getConnection(cadenaConexion, usuario, password);) {
+
+			String sql = "insert into contactos(nombre, email, edad) values(?,?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			// sustituir parametros por valores
+			ps.setString(1, contacto.getNombre());
+			ps.setString(2, contacto.getEmail());
+			ps.setInt(3, contacto.getEdad());
+			ps.execute(); // No se manda otra vez la Sql
+			System.out.println("Registro añadido");
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	// 2.-Eliminar Contacto
+	public void eliminarContacto(String email) {
+		try (Connection con = DriverManager.getConnection(cadenaConexion, usuario, password);) {
+			String sql = "delete from contactos where email = (?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			// sustituir parametros por valores
+			ps.setString(1, email);
+			ps.execute(); // No se manda otra vez la Sql
+			System.out.println("Registro eliminado");
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+	}
+
+	// 3.-Actualizar edad
+	public void actualizarEdad(String email, int edad) {
+		try (Connection con = DriverManager.getConnection(cadenaConexion, usuario, password);) {
+			 String sql ="update contactos set edad = (?) where email= (?)";
+//			String sql = "update from contactos where nombre = (?)";
+			PreparedStatement ps = con.prepareStatement(sql); // sustituir parametros por valores
+			// sustituir parametros por valores
+			ps.setInt(1,edad);
+			ps.setString(2, email);
+			ps.execute(); // No se manda otra vez la Sql
+			System.out.println("Registro actualizado");
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
+	}
 }

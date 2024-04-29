@@ -11,9 +11,9 @@ public class AgregarContacto {
 	public static void main(String[] args) {
 		String cadenaConexion = "jdbc:mysql://localhost:3306/agenda";
 		String usuario= "root";
-		String password = "root";
-		String name="nombrex";
-		String email ="emailx@gmail.com";
+		String password = "rootroot";
+		String name="user2";
+		String email ="user2@gmail.com";
 		int edad = 20;
 		try(Connection con=DriverManager.getConnection(cadenaConexion, usuario, password);){
 			
