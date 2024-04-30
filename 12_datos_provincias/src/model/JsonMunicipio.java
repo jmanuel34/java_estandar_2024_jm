@@ -9,11 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Curso {
-	private int idCurso;
-	private String curso;
-	private int duracion;
-	private double precio;
-	private List<Alumno> alumnos;
-
+public class JsonMunicipio {
+	public List<Municipio> municipios;
 }

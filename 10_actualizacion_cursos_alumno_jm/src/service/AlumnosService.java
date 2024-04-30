@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import model.Alumno;
 
@@ -12,6 +13,7 @@ public class AlumnosService {
 	String cadenaConexion="jdbc:mysql://localhost:3306/formacion";
 	String usuario="root";
 	String password="root";
+	
 	public boolean agregar (Alumno alumno){
 		if (!existe(alumno.getDni()) {
 			
@@ -20,12 +22,10 @@ public class AlumnosService {
 	}
 	public boolean existe(String dni) {
 		try(Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){		
-			String sql="select * from cursos where idCurso=?";
+			String sql="select * from cursos where dni=?";
 			PreparedStatement st=con.prepareStatement(sql);
-			st.setInt(1, idAlumno);
+			st.setString(1, dni);
 			ResultSet rs=st.executeQuery();
-			//debemos movernos a la primera y única fila, para poder extraer
-			//el valor de dicha fila
 			if(rs.next()) {
 				return true;
 			}
@@ -35,4 +35,14 @@ public class AlumnosService {
 		}
 		return false;
 	}
+	public List<Alumno> mostrarAlumnos(String curso){
+		
+		return null;
+	}
+	
+	public Alumno borrarAlumno(String dni) {
+		
+		return null;
+	}
+
 }
