@@ -18,13 +18,13 @@ class TestContactosService {
 
 	@Test
 	void testBuscarContactoPorId() {
-		assertEquals(44, service.buscarContactoPorId(3).getEdad());
+		assertEquals(36, service.buscarContactoPorId(3).getEdad());
 		assertNull(service.buscarContactoPorId(30));
 	}
 
 	@Test
 	void testGetContactos() {
-		assertEquals(5, service.getContactos().size());
+		assertEquals(4, service.getContactos().size());
 	}
 
 }

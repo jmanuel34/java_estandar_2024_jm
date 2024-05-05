@@ -43,5 +43,10 @@ class TestPedidosService {
 		LocalDate fmax=LocalDate.of(2022, 12,31);
 		assertEquals(2, service.pedidosEntreFechas(fmin, fmax).size());
 	}
+	
+	@Test
+	void testMostrarPedidos() {
+		assertEquals(3, service.mostrarPedidos().size());
+	}
 
 }

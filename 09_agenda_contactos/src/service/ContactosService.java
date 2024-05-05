@@ -14,7 +14,8 @@ import model.Contacto;
 public class ContactosService {
 	String cadenaConexion="jdbc:mysql://localhost:3306/agenda";
 	String usuario="root";
-	String password="root";
+	String password="rootroot";
+	
 	//No se admitirán contactos con email duplicado
 	public boolean nuevoContacto(Contacto contacto) {
 		if(existeContactoPorEmail(contacto.getEmail())!=null) {

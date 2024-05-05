@@ -1,5 +1,10 @@
 package service;
 
+/*
+ * 	//cada pedido se graba en una línea:
+ */ //producto,unidades,fechaPedido
+//*/
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -9,15 +14,14 @@ import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
 import java.util.List;
 
+import exceptions.ErrorFuenteDatosException;
 import model.Pedido;
 import utilidades.Util;
-import exceptions.ErrorFuenteDatosException;
 
 
 public class PedidosService {
 	Path pt=Path.of("pedidos.csv");
-	//cada pedido se graba en una línea:
-	//producto,unidades,fechaPedido
+
 	public void borrarPedidos() {
 		try {
 			Files.deleteIfExists(pt);
@@ -36,11 +40,10 @@ public class PedidosService {
 	}
 	public void nuevoPedido(String producto, int unidades, LocalDate fechaPedido) {
 		Pedido p=new Pedido(producto,unidades,fechaPedido);
-	
 		nuevoPedido(p);
 	}
 	
-	public Pedido pedidoMasReciente() {	
+	public Pedido pedidoMasReciente() throws ErrorFuenteDatosException{	
 		try {
 			return Files.lines(pt)
 					.map(p->Util.convertirCadenaAPedido(p)) 	//Stream<String>
@@ -49,7 +52,8 @@ public class PedidosService {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			throw ErrorFuenteDatosException();			
+//			throw ErrorFuenteDatosException();			
+			throw new ErrorFuenteDatosException();
 		}
 				
 	}

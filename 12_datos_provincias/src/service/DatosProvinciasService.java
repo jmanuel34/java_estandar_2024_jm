@@ -17,6 +17,7 @@ import model.Municipio;
 import model.Provincia;
 
 public class DatosProvinciasService {
+	
 	private  Stream<Provincia> getStreamProvincias() {
 		Gson gson = new Gson();
 		String url="https://www.el-tiempo.net/api/json/v2/provincias";
@@ -33,11 +34,11 @@ public class DatosProvinciasService {
 			HttpResponse<String> respuesta=client.send(request, BodyHandlers.ofString());
 		 	return gson.fromJson(respuesta.body(),JsonProvincia.class).getProvincias().stream();
 		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Stream.empty();
 		}
 	}
+	
 	private  Stream<Municipio> getStreamMunicipiosProvincia(String codigo) {
 		Gson gson = new Gson();
 		String url="https://www.el-tiempo.net/api/json/v2/provincias/"+codigo+"/municipios";

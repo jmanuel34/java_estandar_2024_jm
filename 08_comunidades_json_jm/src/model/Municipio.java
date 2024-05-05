@@ -6,7 +6,7 @@ package model;
  * -provincia: nombre, codigo, comunidad
  * -municipio: nombre, provincia, poblacion 
  * https://www.el-tiempo.net/api
- *  Volcar esto es una base de datos
+ *  Volcar esto en una base de datos
  *  Comunidad: nombre y codigo
  *  Provincia: nombre y codigo
  *  Municipios: superficie, poblacion, altitud ... codigo_geo

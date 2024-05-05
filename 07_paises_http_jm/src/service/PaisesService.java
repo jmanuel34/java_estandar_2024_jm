@@ -62,15 +62,14 @@ public class PaisesService {
 			HttpResponse<String> respuesta=client.send(request, BodyHandlers.ofString());
 		 	return Arrays.stream(gson.fromJson(respuesta.body(), Pais[].class));
 		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Stream.empty();
 		}
 	}
 
 	public  List<String> getContinentes() {
-		return getStreamPaises() //Stream<Pais>
-				.map(p -> p.getContinente())//Stream<String>
+		return getStreamPaises() 				//Stream<Pais>
+				.map(p -> p.getContinente())	//Stream<String>
 				.distinct()
 				.toList();
 	}
@@ -94,8 +93,8 @@ public class PaisesService {
 	public String getPaisFiltradoPor(String capital)  {
 		return getStreamPaises()
 		.filter(p -> p.getCapital() != null && p.getCapital().equals(capital))//Stream<Pais>
-		.findFirst()//Optional<Pais>
-		.map(p->p.getNombre())//Optional<String>
+		.findFirst()			//Optional<Pais>
+		.map(p->p.getNombre())	//Optional<String>
 		.orElse("");
 	} 
 }

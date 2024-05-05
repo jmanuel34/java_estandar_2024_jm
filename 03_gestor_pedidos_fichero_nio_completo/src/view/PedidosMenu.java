@@ -2,7 +2,7 @@ package view;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import model.Pedido;
@@ -30,24 +30,35 @@ public class PedidosMenu {
 						pedidosEntreFechas();
 						break;
 					case 4:
+						pedidoProximoAFecha();
+						break;
+					case 5:
+						mostrarPedidos();
+						break;
+					case 6:
+						eliminar();
+						break;
+					case 7:
 						System.out.println("Adios!");
 						break;
-					
 					default:
 						System.out.println("Opción no válida!");
 				}
-			}//end try
+			}
 			catch(NumberFormatException ex) {
 				System.out.println("Debe ser un valor numérico!!");
 			}
-		}while(opcion!=4);
+		}while(opcion!=7);
 	}
 	static void presentarMenu() {
 		System.out.println("""
 				1.- Agregar Pedido
 				2.- Pedido más reciente
 				3.- Pedidos entre fechas
-				4.- Salir
+				4.- Pedido proximo a fecha
+				5.- Mostrar Pedidos
+				6.- Eliminar pedido
+				7.- Salir
 				
 				""");
 	}
@@ -77,12 +88,42 @@ public class PedidosMenu {
 		LocalDate fecha1=LocalDate.parse(sc.nextLine(),sdf);	
 		System.out.println("Fecha límite (dia/mes/año):");
 		LocalDate fecha2=LocalDate.parse(sc.nextLine(),sdf);	
-		ArrayList<Pedido> pedidosEncontrados=service.pedidosEntreFechas(fecha1, fecha2);
+		List<Pedido> pedidosEncontrados=service.pedidosEntreFechas(fecha1, fecha2);
 		for(Pedido p:pedidosEncontrados) {
 			System.out.print("Producto: "+p.getProducto()+" ");
 			System.out.print("Unidades: "+p.getUnidades()+" ");
 			System.out.println("Fecha pedido: "+p.getFechaPedido().format(sdf)+" ");
 		}
 	}
+	
+	static void pedidoProximoAFecha() {
+		Scanner sc=new Scanner(System.in);
+		DateTimeFormatter sdf=DateTimeFormatter.ofPattern("dd/MM/yyyy");	
+		System.out.println("Introduzca la fecha: (dd/MM/yyyy): ");
+		LocalDate fecha=LocalDate.parse(sc.nextLine(),sdf);
+		Pedido pedido = service.pedidoProximoFecha(fecha);
+		System.out.print("Producto: "+pedido.getProducto()+" ");
+		System.out.print("Unidades: "+pedido.getUnidades()+" ");
+		System.out.println("Fecha pedido: "+pedido.getFechaPedido().format(sdf)+" ");
+		
+	}
+	static void mostrarPedidos() {		
+		List<Pedido> pedidos = service.pedidos();
+		DateTimeFormatter sdf=DateTimeFormatter.ofPattern("dd/MM/yyyy");	
 
+		for(Pedido p:pedidos) {
+			System.out.print("Producto: "+p.getProducto()+" ");
+			System.out.print("Unidades: "+p.getUnidades()+" ");
+			System.out.println("Fecha pedido: "+p.getFechaPedido().format(sdf)+" ");
+		}
+		
+	}
+//*	
+	static void eliminar() {
+		Scanner sc=new Scanner(System.in);
+		System.out.print("Introduzca el producto: ");
+		String nombre = sc.nextLine();
+		service.eliminarPedido(nombre);
+	}
+//*/
 }
