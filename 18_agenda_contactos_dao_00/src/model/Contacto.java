@@ -7,10 +7,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class Alumno {
-	private String dni;
+public class Contacto {
+	private int idContacto;
 	private String nombre;
+	private String email;
 	private int edad;
-	private double nota;
-	private int idCurso;
 }
