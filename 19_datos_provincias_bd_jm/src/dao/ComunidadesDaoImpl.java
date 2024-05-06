@@ -7,6 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+import com.google.gson.annotations.SerializedName;
+
 import locator.LocatorConnection;
 import model.Comunidad;
 import model.Municipio;
@@ -47,9 +49,11 @@ public class ComunidadesDaoImpl implements ComunidadesDao {
 			PreparedStatement ps = con.prepareStatement(sql);
 			con.setAutoCommit(false); // Cancelamos el autocommit
 			for (Provincia p : provincias) {
-				ps.setString(1, p.getCodigo());
-				ps.setString(2, p.getNombre());
-				ps.setString(3, p.getCodComunidad());
+				ps.setString(1, p.getCodigoProvincia());
+				ps.setString(2, p.getNombreProvincia());
+				ps.setString(3, p.getCodigoAutonomia());
+				ps.setString(4, p.getComunidadAutonoma());
+				ps.setString(5, p.getCapital());
 				ps.execute();
 				contador++;
 			}
@@ -62,21 +66,30 @@ public class ComunidadesDaoImpl implements ComunidadesDao {
 		}
 		return 0;
 	}
+	
+
 
 	@Override
 	public int saveMunicipios(List<Municipio> municipios) {
 		int contador=0;
 		try (Connection con=LocatorConnection.getConnection()){
-			String sql="insert into municipios(codigo,nombre,codProvincia,superficie,altitud,poblacion) values(?,?,?,?,?,?)";
+			String sql="insert into municipios(codigoINE,codProvincia,NombreMunicipio,NombreProvincia, "
+								+ "Capital,Poblacion, PoblacionMuni, Longitud, Latitud, Altitud, Superficie) values(?,?,?,?,?,?,?,?,?,?,?)";
 			PreparedStatement ps=con.prepareStatement(sql);
 			con.setAutoCommit(false);
 			for(Municipio m:municipios){
-				ps.setInt(1, m.getCodigo());
-				ps.setString(2, m.getNombre());
-				ps.setString(3, m.getCodProvincia());
-				ps.setDouble(4, m.getSuperficie());
-				ps.setInt(5, m.getAltitud());
+				ps.setString(1, m.getCodigoINE());
+				ps.setString(2, m.getCodigoProvincia());
+				ps.setString(3, m.getNombreMunicipio());			
+				ps.setString(4, m.getNombreProvincia());
+				ps.setString(5, m.getNombreCapital());
 				ps.setInt(6, m.getPoblacion());
+				
+				ps.setInt(7, m.getPoblacionMuni());	
+				ps.setDouble(8, m.getLongitud());
+				ps.setDouble(9, m.getLatitud());
+				ps.setInt(10, m.getAltitud());			
+				ps.setDouble(11, m.getSuperficie());
 				ps.execute();
 				contador++;
 			}

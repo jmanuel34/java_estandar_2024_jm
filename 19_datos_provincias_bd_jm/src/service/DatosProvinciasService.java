@@ -64,7 +64,7 @@ public class DatosProvinciasService {
 	
 	public List<Comunidad> comunidades(){
 		return getStreamProvincias()
-				.map(p->new Comunidad(p.getCodComunidad(),p.getComunidad()))
+				.map(p->new Comunidad(p.getCodigoAutonomia(), p.getComunidadAutonoma()))
 				.distinct()
 				.toList();
 	}
@@ -74,8 +74,8 @@ public class DatosProvinciasService {
 				.toList();
 	}
 	public List<Municipio> municipios(){
-		return getStreamProvincias()//Stream<Provincia>
-				.flatMap(p->getStreamMunicipiosProvincia(p.getCodigo()))//Stream<Municipio>
+		return getStreamProvincias()											//Stream<Provincia>
+				.flatMap(p->getStreamMunicipiosProvincia(p.getCodigoProvincia() ))		//Stream<Municipio>
 				.toList();
 	}
 }
