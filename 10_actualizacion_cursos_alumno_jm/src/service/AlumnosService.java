@@ -15,8 +15,8 @@ public class AlumnosService {
 	String password="root";
 	
 	public boolean agregar (Alumno alumno){
-		if (!existe(alumno.getDni()) {
-			
+		if (!existe(alumno.getDni())) {
+		
 		}
 		
 	}
