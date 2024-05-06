@@ -1,12 +1,12 @@
 package view;
 
-import dao.ComunidadesService;
+import dao.ComunidadesDao;
 import service.DatosProvinciasService;
 
 public class Volcado {
 
 	public static void main(String[] args) {
-		var comService=new ComunidadesService();
+		var comService= ComunidadesDao.of();
 		var provService=new DatosProvinciasService();
 		comService.saveComunidades(provService.comunidades());
 		comService.saveProvincias(provService.provincias());
