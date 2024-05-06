@@ -56,7 +56,6 @@ public class DatosProvinciasService {
 			HttpResponse<String> respuesta = client.send(request, BodyHandlers.ofString());
 			return gson.fromJson(respuesta.body(), JsonMunicipio.class).getMunicipios().stream();
 		} catch (IOException | InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return Stream.empty();
 		}
