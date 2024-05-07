@@ -16,16 +16,14 @@ public interface ComunidadesDao {
 
 	int saveComunidades(List<Comunidad> comunidades);
 	
-	int saveProvincias(List<Provincia> provincias);
-
-	int saveMunicipios(List<Municipio> municipios);
-	boolean saveComunidad (Comunidad comunidad);
+	
+	
+	
 	boolean existeComunidad(String codigo);
+	boolean saveComunidad (Comunidad comunidad);
 	public void borrarComunidades();
-	int poblacionTotalProvincia(String provincia);
 	
 	static ComunidadesDao of() {
 		return new ComunidadesDaoImpl();
 	}
-
 }

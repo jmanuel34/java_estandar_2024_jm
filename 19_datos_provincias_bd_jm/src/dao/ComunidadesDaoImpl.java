@@ -14,7 +14,7 @@ import model.Comunidad;
 import model.Municipio;
 import model.Provincia;
 
-public class ComunidadesDaoImpl implements ComunidadesDao {
+class ComunidadesDaoImpl implements ComunidadesDao {
 
 	@Override
 	public int saveComunidades(List<Comunidad> comunidades) {
@@ -40,70 +40,14 @@ public class ComunidadesDaoImpl implements ComunidadesDao {
 		return 0;
 	}
 
-	@Override
-	public int saveProvincias(List<Provincia> provincias) {
 
-		int contador = 0;
-		try (Connection con = LocatorConnection.getConnection()){
-			String sql = "insert into provincias(codigo,nombre,codComunidad) values(?,?,?)";
-			PreparedStatement ps = con.prepareStatement(sql);
-			con.setAutoCommit(false); // Cancelamos el autocommit
-			for (Provincia p : provincias) {
-				ps.setString(1, p.getCodigoProvincia());
-				ps.setString(2, p.getNombreProvincia());
-				ps.setString(3, p.getCodigoAutonomia());
-				ps.setString(4, p.getComunidadAutonoma());
-				ps.setString(5, p.getCapital());
-				ps.execute();
-				contador++;
-			}
-			con.commit();// Confirmamos transacccion si no hubo fallos
-			return contador;
-		} catch (
-
-		SQLException ex) {
-			ex.printStackTrace();
-		}
-		return 0;
-	}
 	
-
-
-	@Override
-	public int saveMunicipios(List<Municipio> municipios) {
-		int contador=0;
-		try (Connection con=LocatorConnection.getConnection()){
-			String sql="insert into municipios(codigoINE,codProvincia,NombreMunicipio,NombreProvincia, "
-								+ "Capital,Poblacion, PoblacionMuni, Longitud, Latitud, Altitud, Superficie) values(?,?,?,?,?,?,?,?,?,?,?)";
-			PreparedStatement ps=con.prepareStatement(sql);
-			con.setAutoCommit(false);
-			for(Municipio m:municipios){
-				ps.setString(1, m.getCodigoINE());
-				ps.setString(2, m.getCodigoProvincia());
-				ps.setString(3, m.getNombreMunicipio());			
-				ps.setString(4, m.getNombreProvincia());
-				ps.setString(5, m.getNombreCapital());
-				ps.setInt(6, m.getPoblacion());
-				
-				ps.setInt(7, m.getPoblacionMuni());	
-				ps.setDouble(8, m.getLongitud());
-				ps.setDouble(9, m.getLatitud());
-				ps.setInt(10, m.getAltitud());			
-				ps.setDouble(11, m.getSuperficie());
-				ps.execute();
-				contador++;
-			}
-			con.commit();
-			return contador;
-		} catch (SQLException ex) {
-			ex.printStackTrace();
-		}
-		return 0;
-		
-	}
 
 	@Override
 	public boolean saveComunidad(Comunidad c) {
+		if (existeComunidad(c.getCodigo())) {
+			return false;
+		}
 		try (Connection con=LocatorConnection.getConnection()){
 			String sql="insert into comunidades(codigo,nombre) values(?,?)";
 			PreparedStatement ps=con.prepareStatement(sql);
@@ -118,7 +62,7 @@ public class ComunidadesDaoImpl implements ComunidadesDao {
 	}
 
 	@Override
-	public boolean existeComunidad(String codigo) {
+	 public boolean existeComunidad(String codigo) {
 		try (Connection con=LocatorConnection.getConnection()){
 			String sql="Select * from  comunidades where nombre= ?";
 			PreparedStatement ps=con.prepareStatement(sql);
@@ -132,6 +76,8 @@ public class ComunidadesDaoImpl implements ComunidadesDao {
 			return false;
 		}
 	}
+	
+	
 
 	@Override
 	public void borrarComunidades() {
@@ -145,21 +91,9 @@ public class ComunidadesDaoImpl implements ComunidadesDao {
 		
 	}
 
-	@Override
-	public int poblacionTotalProvincia(String provincia) {
-		try (Connection con=LocatorConnection.getConnection()){
-			String sql="Select sum(poblacion) from municipios where codigoProvincia= ?";
-			PreparedStatement ps=con.prepareStatement(sql);
-			ps.setString(1, provincia);
-			ResultSet rs=ps.executeQuery();
-			if (rs.next()) {
-				return rs.getInt(1);
-			}
-		} catch(SQLException ex) {
-			ex.printStackTrace();
-		}
-		return 0;
-	}
+
+
+	
 		
 
 }

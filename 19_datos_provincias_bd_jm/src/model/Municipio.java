@@ -12,10 +12,10 @@ public class Municipio {
 	private String nombreMunicipio;
 	@SerializedName("NOMBRE_PROVINCIA")
 	private String nombreProvincia;
-	@SerializedName("POBLACION_CAPITAL")
-	private int poblacion;
 	@SerializedName("NOMBRE_CAPITAL")
 	private String nombreCapital;
+	@SerializedName("POBLACION_CAPITAL")
+	private int poblacion;
 	@SerializedName("POBLACION_MUNI")
 	private int poblacionMuni;
 	@SerializedName("LONGITUD_ETRS89_REGCAN95")

@@ -2,8 +2,6 @@ package service;
 
 import java.util.List;
 
-import dao.ComunidadesDao;
-import dao.ComunidadesDaoImpl;
 import model.Comunidad;
 import model.Municipio;
 import model.Provincia;
