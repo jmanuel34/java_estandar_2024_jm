@@ -116,26 +116,8 @@ public class ContactosServiceImpl implements ContactosService {
 		return contactos;
 	}
 	//Buscar contacto por su email
-		private Contacto existeContactoPorEmail(String email) {
-			try(Connection con=DriverManager.getConnection(cadenaConexion,usuario,password);){		
-				String sql="select * from contactos where email=?";
-				PreparedStatement st=con.prepareStatement(sql);
-				st.setString(1, email);
-				ResultSet rs=st.executeQuery();
-				//debemos movernos a la primera y única fila, para poder extraer
-				//el valor de dicha fila
-				if(rs.next()) {
-					return new Contacto(rs.getInt("idContacto"),
-								rs.getString("nombre"),
-								rs.getString("email"),
-								rs.getInt("edad"));
-				}
-					
-				return null;
-			}catch(SQLException ex) {
-				ex.printStackTrace();
-				return null;
-			}
+		public Contacto existeContactoPorEmail(String email) {
+			Contacto contacto =ContactosDao.
 			
 		}
 	

@@ -19,5 +19,6 @@ public interface ContactosService {
 
 	//Recuperar todos los contactos
 	List<Contacto> getContactos();
+	
 
 }

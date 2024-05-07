@@ -11,6 +11,7 @@ public interface ContactosDao {
 	Contacto findById (int idContacto);
 	List<Contacto> findAll();
 	void deteleByEmail(String email);
+	Contacto existeContactoPorEmail(String email);
 	
 	static ContactosDao of() {
 		return new ContactosDaoImpl();
