@@ -12,31 +12,35 @@ public class CuentasDaoImpl implements CuentasDao {
 
 	@Override
 	public Cuenta findById(int idCuenta) {
-		try (Connection con=LocatorConnection.getConnection();){
-			String sql="select * from comunidades where numerocuenta=?";
-			PreparedStatement ps=con.prepareStatement(sql);
-			ps.setInt(1, idCuenta);			
-			ResultSet rs=ps.executeQuery();
+		try (Connection con = LocatorConnection.getConnection();) {
+			String sql = "select * from cuentas where numerocuenta=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, idCuenta);
+			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				return new Cuenta(rs.getInt("numeroCuenta"),
-						rs.getDouble("saldo"),
-						rs.getString("tipocuenta")
-						);
+				return new Cuenta(rs.getInt("numeroCuenta"), 
+						rs.getDouble("saldo"), 
+						rs.getString("tipocuenta"));
 			}
-		}
-		catch(SQLException ex) {
+
+		} catch (SQLException ex) {
 			ex.printStackTrace();
-			
+
 		}
 		return new Cuenta();
 	}
 
 	@Override
 	public void updateSaldo(int idCuenta, double nuevoSaldo) {
-		// TODO Auto-generated method stub
-		
+		try (Connection con = LocatorConnection.getConnection();) {
+			String sql = "update cuentas set saldo = ? where numeroCuenta=?";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setDouble(1, nuevoSaldo);
+			ps.setInt(2, idCuenta);
+			ResultSet rs = ps.executeQuery();
+		} catch (SQLException ex) {
+			ex.printStackTrace();
+		}
+
 	}
-
-
-
 }

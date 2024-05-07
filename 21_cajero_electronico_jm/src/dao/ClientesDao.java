@@ -5,5 +5,5 @@ import java.util.List;
 import model.Cliente;
 
 public interface ClientesDao {
-	List<Cliente> obtenerTitulares(int idCuenta);
+	List<Cliente> findAll(int idCuenta);
 }

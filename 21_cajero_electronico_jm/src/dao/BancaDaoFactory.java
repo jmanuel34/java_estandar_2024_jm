@@ -1,14 +1,15 @@
 package dao;
 
 public class BancaDaoFactory {
-	public static BancaDaoFactory getCuentasDao() {
+	
+	public static CuentasDao getCuentasDao() {
 		return new CuentasDaoImpl();
 	}
-	public static BancaDaoFactory getClientesDao() {
+	public static ClientesDao getClientesDao() {
 		return new ClientesDaoImpl();
 	}
-	public static BancaDaoFactory getMovimientosDao() {
-		return new  MovimientosDaoImpl();
+	public static MovimientosDao getMovimientosDao() {
+		return new MovimientosDaoImpl();
 	}
 	
 

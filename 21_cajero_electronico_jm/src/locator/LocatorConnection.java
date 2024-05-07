@@ -7,7 +7,7 @@ import java.sql.SQLException;
 public class LocatorConnection {
 	static String cadenaConexion="jdbc:mysql://localhost:3306/bancabd";
 	static String usuario="root";
-	static String password="root";
+	static String password="rootroot";
 	public static Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(cadenaConexion,usuario,password);
 	}
