@@ -15,10 +15,6 @@ import model.Provincia;
 public interface ComunidadesDao {
 
 	int saveComunidades(List<Comunidad> comunidades);
-	
-	
-	
-	
 	boolean existeComunidad(String codigo);
 	boolean saveComunidad (Comunidad comunidad);
 	public void borrarComunidades();
