@@ -2,7 +2,7 @@ package service;
 
 public class CajeroServiceFactoy {
 	
-	public CajeroService getCajeroService() {
+	public static CajeroService getCajeroService() {
 		return new CajeroServiceImpl();
 	}
 

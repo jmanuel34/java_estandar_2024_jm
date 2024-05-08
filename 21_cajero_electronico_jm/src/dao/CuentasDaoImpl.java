@@ -8,7 +8,7 @@ import java.sql.SQLException;
 import locator.LocatorConnection;
 import model.Cuenta;
 
-public class CuentasDaoImpl implements CuentasDao {
+class CuentasDaoImpl implements CuentasDao {
 
 	@Override
 	public Cuenta findById(int idCuenta) {

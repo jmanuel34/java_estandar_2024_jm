@@ -1,6 +1,6 @@
 package service;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +12,7 @@ import model.Cliente;
 import model.Cuenta;
 import model.Movimiento;
 
-public class CajeroServiceImpl implements CajeroService {
+class CajeroServiceImpl implements CajeroService {
 	
 	ClientesDao clientesDao;
 	CuentasDao cuentasDao;
@@ -35,12 +35,12 @@ public class CajeroServiceImpl implements CajeroService {
 	@Override
 	public Cuenta extraccion(int idCuenta, double cantidad) {
 		Cuenta cuenta= cuentasDao.findById(idCuenta);
-		if (cuenta.getSaldo()>cantidad) {
+		if (cuenta.getSaldo()>cantidad && cuenta!=null) {
 			cuentasDao.updateSaldo(idCuenta, cantidad);
-			movimientosDao.save(new Movimiento(idCuenta, LocalDate.now(), cantidad, "extraccion"));
+			movimientosDao.save(new Movimiento(0, idCuenta, LocalDateTime.now(), cantidad, "extraccion"));
+			return cuenta;
 		}
-		return cuenta;
-		
+		return null;
 	}
 	
 	//ingresa dinero en la cuenta indicada. Si la cuenta no existe
@@ -49,7 +49,7 @@ public class CajeroServiceImpl implements CajeroService {
 	public Cuenta ingreso(int idCuenta, double cantidad) {
 		Cuenta cuenta= cuentasDao.findById(idCuenta);
 			cuentasDao.updateSaldo(idCuenta, cantidad);
-			movimientosDao.save(new Movimiento(idCuenta, LocalDate.now(), cantidad, "extraccion"));
+			movimientosDao.save(new Movimiento(idCuenta, LocalDateTime.now(), cantidad, "ingreso"));
 			return cuenta;
 	}
 	//transfiere dinero entre las cuentas indicadas. Si alguna cuenta no existe
@@ -59,7 +59,7 @@ public class CajeroServiceImpl implements CajeroService {
 		Cuenta cuentaOrigen= cuentasDao.findById(idCuentaOrigen);
 		Cuenta cuentaDestino= cuentasDao.findById(idCuentaDestino);
 		if (cuentaOrigen != null && cuentaDestino !=null) {
-			LocalDate fecha = LocalDate.now();
+			LocalDateTime fecha = LocalDateTime.now();
 			Movimiento movE = new Movimiento(idCuentaOrigen, fecha, cantidad, "extraccion");
 			Movimiento movI = new Movimiento(idCuentaDestino, fecha, cantidad, "ingreso");
 			movimientosDao.save(movI);
@@ -86,7 +86,7 @@ public class CajeroServiceImpl implements CajeroService {
 	@Override
 	public double obtenerSaldo(int idCuenta) {
 		Cuenta cuenta = cuentasDao.findById(idCuenta);
-		return cuenta.getSaldo();
+		return cuenta!=null?cuenta.getSaldo():0;
 	}
 
 }

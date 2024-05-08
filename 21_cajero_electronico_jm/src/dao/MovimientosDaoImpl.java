@@ -10,25 +10,25 @@ import java.util.List;
 import locator.LocatorConnection;
 import model.Movimiento;
 
-public class MovimientosDaoImpl implements MovimientosDao {
+class MovimientosDaoImpl implements MovimientosDao {
 
 	@Override
 	public List<Movimiento> findByCuenta(int idCuenta) {
-		List<Movimiento> mov = new ArrayList<Movimiento>();
+		List<Movimiento> movs = new ArrayList<Movimiento>();
 		try (Connection con = LocatorConnection.getConnection();) {
 			String sql = "select * from movimientos where idCuenta=?";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, idCuenta);
-			ResultSet rs = ps.executeQuery(sql);
+			ResultSet rs = ps.executeQuery();
 			while (rs.next()) {
-				mov.add(new Movimiento(rs.getInt("idMovimiento"), 
+				movs.add(new Movimiento(
 						rs.getInt("idCuenta"),
-						rs.getDate("fecha").toLocalDate(), 
+						rs.getTimestamp("fecha").toLocalDateTime(), 
 						rs.getDouble("cantidad"), 
 						rs.getString("operacion")					
 						));
 			}
-			return mov;
+			return movs;
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 
@@ -42,6 +42,7 @@ public class MovimientosDaoImpl implements MovimientosDao {
 		try (Connection con = LocatorConnection.getConnection();) {
 			String sql = "insert into movimientos (idCuenta, fecha, cantidad, operacion) " + "VALUES (?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
+			
 			ps.execute();
 
 		} catch (SQLException ex) {
