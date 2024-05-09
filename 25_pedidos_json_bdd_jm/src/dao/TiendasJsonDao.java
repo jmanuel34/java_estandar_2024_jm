@@ -5,6 +5,6 @@ import java.util.List;
 import model.Pedido;
 
 public interface TiendasJsonDao {
-	List<Pedido> getPedidos(String ruta);
+	List<Pedido> getPedidos(String ruta, String tienda);
 
 }

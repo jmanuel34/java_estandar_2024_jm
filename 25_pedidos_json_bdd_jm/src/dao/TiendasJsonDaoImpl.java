@@ -16,10 +16,11 @@ import model.Tienda;
 public class TiendasJsonDaoImpl implements TiendasJsonDao {
 
 	@Override
-		public  List<Pedido> getPedidos(String ruta) {
+		public  List<Pedido> getPedidos(String ruta, String tienda) {
+			String rutaCompleta= (ruta+tienda+".json");
 			Gson gson = new Gson();
 			try {
-				return Arrays.stream(gson.fromJson(new FileReader(ruta), Pedido[].class)).toList();
+				return Arrays.stream(gson.fromJson(new FileReader(rutaCompleta), Pedido[].class)).toList();
 			} catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
 				e.printStackTrace();
 				return null;

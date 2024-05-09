@@ -13,7 +13,7 @@ public class PedidosDaoImpl implements PedidosDao {
 	@Override
 	public boolean agregar(Pedido pedido) {
 		try (Connection con = LocatorConnection.getConnection();) {
-			String sql = "insert into pedidos (producto, tienda, fechaPedido, precio) " + "VALUES (?,?,?,?)";
+			String sql = "insert into pedidos (producto, tienda, precio) " + "VALUES (?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setString(1, pedido.getProducto());
 			ps.setString(2, pedido.getTienda());
