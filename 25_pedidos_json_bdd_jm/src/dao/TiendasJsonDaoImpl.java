@@ -13,7 +13,7 @@ import com.google.gson.JsonSyntaxException;
 import model.Pedido;
 import model.Tienda;
 
-public class TiendasDaoImpl implements TiendasDao {
+public class TiendasJsonDaoImpl implements TiendasJsonDao {
 
 	@Override
 		public  List<Pedido> getPedidos(String ruta) {

@@ -11,7 +11,7 @@ import model.Pedido;
 public class PedidosDaoImpl implements PedidosDao {
 
 	@Override
-	public void agregar(Pedido pedido) {
+	public boolean agregar(Pedido pedido) {
 		try (Connection con = LocatorConnection.getConnection();) {
 			String sql = "insert into pedidos (producto, tienda, fechaPedido, precio) " + "VALUES (?,?,?,?)";
 			PreparedStatement ps = con.prepareStatement(sql);
@@ -20,11 +20,13 @@ public class PedidosDaoImpl implements PedidosDao {
 //			ps.setTimestamp(2, Timestamp.valueOf(pedido.getFecha()));
 			ps.setDouble(3, pedido.getPrecio());
 			ps.execute();
+			return true;
 
 		} catch (SQLException ex) {
 			ex.printStackTrace();
 
 		}
+		return false;
 
 	}
 	
@@ -65,6 +67,12 @@ public class PedidosDaoImpl implements PedidosDao {
 	public void borrar(Pedido pedido) {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public Pedido findById(Pedido p) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	

@@ -8,9 +8,9 @@ import service.PedidosService;
 import service.PedidosServiceFactory;
 
 public class Lanzador {
-	static String ruta1="c:\\temp\\pedidos\\tienda1.json";
-	static String ruta2="c:\\temp\\pedidos\\tienda2.json";
-	static String ruta3="c:\\temp\\pedidos\\tienda3.json";
+	static String ruta1 = "/Users/josemanuelmendez/Documents/Cursos/Curso Java 2024/archivos/tiendas/tienda1.json";
+	static String ruta2="/Users/josemanuelmendez/Documents/Cursos/Curso Java 2024/archivos/tiendas/tienda2.json";
+	static String ruta3="/Users/josemanuelmendez/Documents/Cursos/Curso Java 2024/archivos/tiendas/tienda3.json";
 	public static void main(String[] args) throws IOException {
 		
 		/*PedidosService service=PedidosServiceFactory.getPedidosService();
@@ -38,7 +38,7 @@ class TareaPedido implements Runnable{
 	@Override
 	public void run() {
 		PedidosService service=PedidosServiceFactory.getPedidosService();
-		service.guardarPedidos(service.pedidosTienda(ruta, tienda));		
+		service.guardarPedidos(ruta, tienda);		
 	}
 	
 }

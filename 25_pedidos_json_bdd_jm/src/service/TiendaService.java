@@ -1,33 +1,30 @@
 package service;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.util.Arrays;
 import java.util.stream.Stream;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonIOException;
-import com.google.gson.JsonSyntaxException;
 
 import dao.PedidosDao;
 import dao.PedidosDaoFactory;
+import dao.TiendasJsonDao;
 import model.Pedido;
 
 
 public class TiendaService {
 	private String ruta;
 	private PedidosDao pedidosDao;
+	private TiendasJsonDao tiendasJsonDao;
 	
 	public TiendaService(String ruta) {
 		this.ruta = ruta;
 		pedidosDao = PedidosDaoFactory.getPedidosDao();
+		tiendasJsonDao = PedidosDaoFactory.getTiendasJsonDao();
 	}
-	
-	
 
 	private boolean guardarPedidos(Stream<Pedido> pedidos) {
-		Stream<Pedido> p= pedidos;
+		Stream<Pedido> p = pedidos;
 		return pedidosDao.agregar(p.toList());
+	}
+	private boolean guardarPedido (Pedido p) {
+		return pedidosDao.agregar(p);	
 	}
 
 }

@@ -13,7 +13,7 @@ import com.google.gson.GsonBuilder;
 import model.Pedido;
 import serializacion.DeserializadorFecha;
 
-public class TiendasDaoImpl implements TiendasDao {
+public class TiendasJsonDaoImpl implements TiendasJsonDao {
 	
 	private Stream<Pedido> pedidosFichero(String ruta){		
 		Gson gson=new GsonBuilder()//GsonBuilder

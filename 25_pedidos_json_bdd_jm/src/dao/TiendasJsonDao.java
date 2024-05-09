@@ -4,7 +4,7 @@ import java.util.List;
 
 import model.Pedido;
 
-public interface TiendasDao {
+public interface TiendasJsonDao {
 	List<Pedido> getPedidos(String ruta);
 
 }

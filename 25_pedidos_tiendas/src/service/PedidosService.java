@@ -6,5 +6,5 @@ import model.Pedido;
 
 public interface PedidosService {
 	List<Pedido> pedidosTienda(String ruta, String tienda);
-	void guardarPedidos(List<Pedido> pedidos);
+	void guardarPedidos(String ruta, String tienda);
 }
