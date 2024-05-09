@@ -17,7 +17,7 @@ public class CursosService {
 	String usuario = "root";
 	String password = "root";
 
-	public boolean existe(int idCurso) {
+	public boolean cursoPorId(int idCurso) {
 		try (Connection con = DriverManager.getConnection(cadenaConexion, usuario, password);) {
 			String sql = "select * from cursos where idCurso=?";
 			PreparedStatement st = con.prepareStatement(sql);
@@ -36,7 +36,7 @@ public class CursosService {
 	}
 
 	public boolean agregar(Curso curso) {
-		if (!existe(curso.getIdCurso())) {
+		if (!cursoPorId(curso.getIdCurso())) {
 			try (Connection con = DriverManager.getConnection(cadenaConexion, usuario, password);) {
 				String sql = "insert into curso(curso,duracion,precio) values(?,?,?)";
 				PreparedStatement ps = con.prepareStatement(sql);

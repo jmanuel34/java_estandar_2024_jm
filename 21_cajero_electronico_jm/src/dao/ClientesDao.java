@@ -6,4 +6,5 @@ import model.Cliente;
 
 public interface ClientesDao {
 	List<Cliente> findAll(int idCuenta);
+	boolean save(Cliente cliente);
 }

@@ -12,7 +12,7 @@ import com.google.gson.JsonSyntaxException;
 
 import model.Curso;
 
-public class CursosJSonService {
+public class CursosJsonService {
 	String dir = ("C:\\Users\\manana\\Curso Java\\Java2024\\archivos\\cursos.json");
 
 	public List<Curso> leerFichero() {

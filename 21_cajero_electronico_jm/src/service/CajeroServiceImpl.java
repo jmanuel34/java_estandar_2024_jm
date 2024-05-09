@@ -36,7 +36,8 @@ class CajeroServiceImpl implements CajeroService {
 	public Cuenta extraccion(int idCuenta, double cantidad) {
 		Cuenta cuenta= cuentasDao.findById(idCuenta);
 		if (cuenta.getSaldo()>cantidad && cuenta!=null) {
-			cuentasDao.updateSaldo(idCuenta, cantidad);
+			cuenta.setSaldo(cuenta.getSaldo()-cantidad);
+			cuentasDao.updateSaldo(idCuenta, cuenta.getSaldo());
 			movimientosDao.save(new Movimiento(0, idCuenta, LocalDateTime.now(), cantidad, "extraccion"));
 			return cuenta;
 		}
@@ -87,6 +88,12 @@ class CajeroServiceImpl implements CajeroService {
 	public double obtenerSaldo(int idCuenta) {
 		Cuenta cuenta = cuentasDao.findById(idCuenta);
 		return cuenta!=null?cuenta.getSaldo():0;
+	}
+
+
+	@Override
+	public boolean save(Cliente cliente) {
+		return clientesDao.save(cliente);
 	}
 
 }

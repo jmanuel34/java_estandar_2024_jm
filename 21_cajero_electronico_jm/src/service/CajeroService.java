@@ -21,4 +21,5 @@ public interface CajeroService {
 	List<Cliente> obtenerTitulares(int idCuenta);
 	List<Movimiento> obtenerMovimientos(int idCuenta);
 	double obtenerSaldo(int idCuenta);
+	boolean save(Cliente cliente);
 } 
