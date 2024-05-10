@@ -3,15 +3,15 @@ package service;
 import java.util.List;
 
 import dao.DaoFactory;
-import dao.TiendasJsonDao;
+import dao.TiendasDao;
 import dao.PedidosDao;
 import model.Pedido;
 
 public class PedidosServiceImpl implements PedidosService {
 
-	@Override
-	public List<Pedido> pedidosTienda(String ruta, String tienda) {
-		TiendasJsonDao fDao=DaoFactory.getFicheroPedidosDao();
+	
+	private List<Pedido> pedidosTienda(String ruta, String tienda) {
+		TiendasDao fDao=DaoFactory.getFicheroPedidosDao();
 		List<Pedido> pedidosFichero=fDao.getPedidos(ruta);
 		//recorremos los pedidos que llegan del fichero y les asignamos 
 		//tienda
@@ -20,13 +20,19 @@ public class PedidosServiceImpl implements PedidosService {
 	
 	}
 
-	@Override
-	public void guardarPedidos(String ruta, String tienda) {
-		List<Pedido> pedidos = pedidosTienda(ruta, tienda);
+	
+	private void guardarPedidos(List<Pedido> pedidos) {
 		PedidosDao pDao=DaoFactory.getPedidosDao();
 		//recorremos lista de pedidos y los guardamos
 		pedidos.forEach(p->pDao.save(p));
 
 	}
 
+	@Override
+	public void procesarPedidos(String ruta, String tienda) {
+		guardarPedidos(pedidosTienda(ruta,tienda));
+		
+	}
+
+	
 }

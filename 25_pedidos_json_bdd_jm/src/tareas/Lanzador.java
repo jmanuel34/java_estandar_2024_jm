@@ -6,9 +6,13 @@ import service.TiendaService;
 import service.TiendaServiceFactory;
 
 public class Lanzador {
-	static String ruta1 = "/Users/josemanuelmendez/Documents/Cursos/Curso Java 2024/archivos/tiendas/";
-	static String ruta2="/Users/josemanuelmendez/Documents/Cursos/Curso Java 2024/archivos/tiendas/";
-	static String ruta3="/Users/josemanuelmendez/Documents/Cursos/Curso Java 2024/archivos/tiendas/";
+//	C:\\Users\\manana\\Curso Java\\Java2024\\ficheros
+	static String ruta1 = ("C:\\Users\\manana\\Curso Java\\Java2024\\ficheros\\");
+	static String ruta2 = ("C:\\Users\\manana\\Curso Java\\Java2024\\ficheros\\");
+	static String ruta3 = ("C:\\Users\\manana\\Curso Java\\Java2024\\ficheros\\");
+//	static String ruta1 = "/Users/josemanuelmendez/Documents/Cursos/Curso Java 2024/archivos/tiendas/";
+//	static String ruta2="/Users/josemanuelmendez/Documents/Cursos/Curso Java 2024/archivos/tiendas/";
+//	static String ruta3="/Users/josemanuelmendez/Documents/Cursos/Curso Java 2024/archivos/tiendas/";
 	public static void main(String[] args) throws IOException {
 		
 		/*PedidosService service=PedidosServiceFactory.getPedidosService();

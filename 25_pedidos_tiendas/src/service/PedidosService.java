@@ -5,6 +5,7 @@ import java.util.List;
 import model.Pedido;
 
 public interface PedidosService {
-	List<Pedido> pedidosTienda(String ruta, String tienda);
-	void guardarPedidos(String ruta, String tienda);
+	/*List<Pedido> pedidosTienda(String ruta, String tienda);
+	void guardarPedidos(List<Pedido> pedidos);*/
+	void procesarPedidos(String ruta, String tienda);
 }

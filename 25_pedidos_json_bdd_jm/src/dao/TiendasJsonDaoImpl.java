@@ -24,7 +24,7 @@ public class TiendasJsonDaoImpl implements TiendasJsonDao {
 			Gson gson=new GsonBuilder()//GsonBuilder
 			.registerTypeAdapter(LocalDate.class, new DeserializadorFecha()) //GsonBuilder
 			.create();
-			try(FileReader reader=new FileReader(ruta);){
+			try(FileReader reader=new FileReader(rutaCompleta);){
 				return Arrays.stream(gson.fromJson(new FileReader(rutaCompleta), Pedido[].class)).toList();
 			} catch (JsonSyntaxException | JsonIOException | IOException e) {
 				e.printStackTrace();

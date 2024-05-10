@@ -1,8 +1,8 @@
 package dao;
 
 public class DaoFactory {
-	public static TiendasJsonDao getFicheroPedidosDao() {
-		return new TiendasJsonDaoImpl();
+	public static TiendasDao getFicheroPedidosDao() {
+		return new TiendasDaoImpl();
 	}
 	
 	public static PedidosDao getPedidosDao() {
