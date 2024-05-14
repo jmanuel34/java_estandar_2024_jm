@@ -12,7 +12,7 @@ public class Pedido {
 	private int idPedido;
 	private String producto;
 	private String tienda;
-//	private LocalDateTime fecha;
+	private LocalDateTime fecha;
 	private double precio;
 
 }

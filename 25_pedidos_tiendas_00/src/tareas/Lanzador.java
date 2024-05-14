@@ -18,8 +18,8 @@ public class Lanzador {
 		new Thread(()->service.guardarPedidos(service.pedidosTienda(ruta2, "tienda2"))).start();
 		new Thread(()->service.guardarPedidos(service.pedidosTienda(ruta3, "tienda3"))).start();*/
 		new Thread(new TareaPedido(ruta1,"tienda1")).start();
-		new Thread(new TareaPedido(ruta2,"tienda2")).start();
-		new Thread(new TareaPedido(ruta3,"tienda3")).start();
+//		new Thread(new TareaPedido(ruta2,"tienda2")).start();
+//		new Thread(new TareaPedido(ruta3,"tienda3")).start();
 		System.out.println("Pedidos enviados. Pulse tecla para continuar");
 		System.in.read();
 	}
