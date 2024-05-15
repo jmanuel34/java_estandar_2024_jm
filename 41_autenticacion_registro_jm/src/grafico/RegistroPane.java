@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -27,7 +28,7 @@ public class RegistroPane extends JFrame {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -39,7 +40,7 @@ public class RegistroPane extends JFrame {
 			}
 		});
 	}
-
+//*/
 	/**
 	 * Create the frame.
 	 */
@@ -71,23 +72,23 @@ public class RegistroPane extends JFrame {
 		contentPane.add(lblTelefono);
 		
 		textUsuario = new JTextField();
-		textUsuario.setBounds(114, 24, 86, 20);
+		textUsuario.setBounds(148, 21, 86, 20);
 		contentPane.add(textUsuario);
 		textUsuario.setColumns(10);
 		
 		textPasword = new JTextField();
 		textPasword.setColumns(10);
-		textPasword.setBounds(114, 49, 86, 20);
+		textPasword.setBounds(148, 46, 86, 20);
 		contentPane.add(textPasword);
 		
 		textEmail = new JTextField();
 		textEmail.setColumns(10);
-		textEmail.setBounds(114, 74, 86, 20);
+		textEmail.setBounds(148, 71, 86, 20);
 		contentPane.add(textEmail);
 		
 		textTelefono = new JTextField();
 		textTelefono.setColumns(10);
-		textTelefono.setBounds(114, 97, 86, 20);
+		textTelefono.setBounds(148, 94, 86, 20);
 		contentPane.add(textTelefono);
 		
 		JButton btnRegistrar = new JButton("Registrar");
@@ -102,8 +103,10 @@ public class RegistroPane extends JFrame {
 									textEmail.getText(),
 									Integer.parseInt( textTelefono.getText()));
 		if (cDao.registrar(cliente)) {
-			
+			JOptionPane.showMessageDialog(null, "Usuario registrado con éxito");
 		}
+		else JOptionPane.showMessageDialog(null, "Fallo en el registro del usuario");
+
 
 	}
 
