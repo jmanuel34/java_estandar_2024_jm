@@ -107,6 +107,14 @@ public class RegistroPane extends JFrame {
 		btnRegistrar.setBounds(52, 208, 89, 23);
 		contentPane.add(btnRegistrar);
 		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistroPane.this.dispose();
+			}
+		});
+		btnSalir.setBounds(251, 208, 89, 23);
+		contentPane.add(btnSalir);
+		
 	}
-
 }
