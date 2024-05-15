@@ -9,14 +9,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.TableModel;
 
 import adaptadores.ComboBoxModelComunidadesImpl;
+import adaptadores.TableModelProvinciasImpl;
 
 public class CiudadesEs extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
+	private JTable tableProvincias;
 
 	/**
 	 * Launch the application.
@@ -54,16 +58,23 @@ public class CiudadesEs extends JFrame {
 		scrollPane.setBounds(40, 43, 377, 38);
 		contentPane.add(scrollPane);
 		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(40, 93, 377, 69);
+		contentPane.add(scrollPane_1);
+		
+		tableProvincias = new JTable();
+		scrollPane_1.setViewportView(tableProvincias);
+		
 		JComboBox comboComunidades = new JComboBox();
 		comboComunidades.addItemListener(new ItemListener() {
-			public void itemStateChanged(ItemEvent e) {
-				
+			public void itemStateChanged(ItemEvent e) {			
 				if (e.getStateChange() == ItemEvent.SELECTED) {
 					String seleccionado=(String)comboComunidades.getSelectedItem();
 					//creamos adaptador con los datos de los paises
 					//y lo volcamos en JTable
-					var adaptador=new ComboBoxModelComunidadesImpl();
-					comboComunidades.setModel(adaptador);
+					var adaptador=new TableModelProvinciasImpl(seleccionado);
+					tableProvincias.setModel((TableModel) adaptador);
+					
 				}		
 				
 				
@@ -71,6 +82,8 @@ public class CiudadesEs extends JFrame {
 		});
 		comboComunidades.setModel(new ComboBoxModelComunidadesImpl());
 		scrollPane.setViewportView(comboComunidades);
+		
+		
 		
 	}
 }
