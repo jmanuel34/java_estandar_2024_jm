@@ -97,6 +97,14 @@ public class RegistroPane extends JFrame {
 		});
 		btnRegistrar.setBounds(52, 208, 89, 23);
 		contentPane.add(btnRegistrar);
+		
+		JButton btnSalir = new JButton("Salir");
+		btnSalir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnSalir.setBounds(272, 208, 89, 23);
+		contentPane.add(btnSalir);
 		Cliente cliente = new Cliente(textUsuario.getText(),
 									textPasword.getText(),
 									textEmail.getText(),
@@ -106,5 +114,4 @@ public class RegistroPane extends JFrame {
 		}
 
 	}
-
 }
