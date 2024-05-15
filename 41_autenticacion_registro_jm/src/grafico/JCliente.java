@@ -71,6 +71,8 @@ public class JCliente extends JFrame {
 		contentPane.add(passwordField);
 		
 		JButton btnSubmit = new JButton("Aceptar");
+		btnSubmit.setBounds(109, 102, 89, 23);
+		contentPane.add(btnSubmit);
 		btnSubmit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -80,12 +82,15 @@ public class JCliente extends JFrame {
 				
 			}
 		});
-		btnSubmit.setBounds(109, 102, 89, 23);
-		contentPane.add(btnSubmit);
+		
 		
 		JButton btnRegistrar = new JButton("Registrar");
+		btnRegistrar.setBounds(21, 227, 89, 23);
+		contentPane.add(btnRegistrar);
 		btnRegistrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				RegistroPane registoPane = new RegistroPane();
+				registroPane.setVisible(true);
 /*				
 				registroPane = new JPanel();	
 				registroPane = new JPanel();
@@ -97,7 +102,6 @@ public class JCliente extends JFrame {
 //*/
 			}
 		});
-		btnRegistrar.setBounds(21, 227, 89, 23);
-		contentPane.add(btnRegistrar);
+		
 	}
 }
