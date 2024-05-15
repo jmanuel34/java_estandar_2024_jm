@@ -5,7 +5,7 @@ import java.util.List;
 import model.Municipio;
 import model.Provincia;
 
-public interface DatosProvinciasService {
+public interface DatosService {
 
 	List<String> comunidades();
 

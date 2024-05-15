@@ -8,6 +8,7 @@ import service.PaisesServiceFactory;
 
 public class ComboBoxModelContinentesImpl extends DefaultComboBoxModel<String> {
 	List<String> continentes;
+	
 	public ComboBoxModelContinentesImpl() {
 		var paisesService=PaisesServiceFactory.getPaisesService();
 		continentes=paisesService.getContinentes();

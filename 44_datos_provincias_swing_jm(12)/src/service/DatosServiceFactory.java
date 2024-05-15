@@ -1,8 +1,8 @@
 package service;
 
 public class DatosServiceFactory {
-	public static DatosProvinciasService getDatosProvincias() {
-		return new DatosProvinciasServiceImpl();
+	public static DatosService getDatos() {
+		return new DatosServiceImpl();
 	}
 
 }

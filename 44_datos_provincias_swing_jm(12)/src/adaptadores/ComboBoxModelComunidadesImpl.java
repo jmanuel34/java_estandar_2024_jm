@@ -4,18 +4,21 @@ import java.util.List;
 
 import javax.swing.DefaultComboBoxModel;
 
-import service.PaisesServiceFactory;
+import service.DatosServiceFactory;
 
-public class ComboBoxModelContinentesImpl extends DefaultComboBoxModel<String> {
+public class ComboBoxModelComunidadesImpl extends DefaultComboBoxModel<String> {
 	List<String> continentes;
-	public ComboBoxModelContinentesImpl() {
-		var datosService=PaisesServiceFactory.getPaisesService();
-		continentes=paisesService.getContinentes();
+	
+	public ComboBoxModelComunidadesImpl() {
+		var datosService=DatosServiceFactory.getDatos();
+		continentes=datosService.comunidades();
 	}
+	
 	@Override
 	public int getSize() {
 		return continentes.size();
 	}
+	
 	@Override
 	public String getElementAt(int index) {
 		return continentes.get(index);

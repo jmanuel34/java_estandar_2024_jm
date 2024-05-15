@@ -16,7 +16,7 @@ import model.JsonProvincia;
 import model.Municipio;
 import model.Provincia;
 
-public class DatosProvinciasServiceImpl implements DatosProvinciasService {
+public class DatosServiceImpl implements DatosService {
 	private  Stream<Provincia> getStreamProvincias() {
 		Gson gson = new Gson();
 		String url="https://www.el-tiempo.net/api/json/v2/provincias";
