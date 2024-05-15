@@ -3,6 +3,8 @@ package grafico;
 import java.awt.EventQueue;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -14,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.TableModel;
 
 import adaptadores.ComboBoxModelComunidadesImpl;
+import adaptadores.TableModelMunicipiosImpl;
 import adaptadores.TableModelProvinciasImpl;
 
 public class CiudadesEs extends JFrame {
@@ -21,6 +24,7 @@ public class CiudadesEs extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable tableProvincias;
+	private JTable tableMunicipios;
 
 	/**
 	 * Launch the application.
@@ -58,11 +62,34 @@ public class CiudadesEs extends JFrame {
 		scrollPane.setBounds(40, 43, 377, 38);
 		contentPane.add(scrollPane);
 		
+		
+		
 		JScrollPane scrollPane_1 = new JScrollPane();
+		tableProvincias = new JTable();
+		scrollPane_1.setViewportView(tableProvincias);
+		
+		JScrollPane scrollPane_2 = new JScrollPane();
+		scrollPane_2.setBounds(40, 177, 377, 89);
+		contentPane.add(scrollPane_2);
+		
+		tableMunicipios = new JTable();
+		scrollPane_2.setViewportView(tableMunicipios);
+		
+		scrollPane_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+			
+				String provinciaSelected = (String) tableProvincias.getValueAt(tableProvincias.getSelectedRow() , 0);
+				var adaptadorMunicipios = new TableModelMunicipiosImpl(provinciaSelected);
+				tableMunicipios.setModel(adaptadorMunicipios);
+				//	            System.out.println(provinciaSelected);
+				
+			}
+		});
 		scrollPane_1.setBounds(40, 93, 377, 69);
 		contentPane.add(scrollPane_1);
 		
-		tableProvincias = new JTable();
+		
 		scrollPane_1.setViewportView(tableProvincias);
 		
 		JComboBox comboComunidades = new JComboBox();
@@ -74,14 +101,15 @@ public class CiudadesEs extends JFrame {
 					//y lo volcamos en JTable
 					var adaptador=new TableModelProvinciasImpl(seleccionado);
 					tableProvincias.setModel((TableModel) adaptador);
-					
-				}		
-				
-				
+				}				
 			}
 		});
+		
+		
 		comboComunidades.setModel(new ComboBoxModelComunidadesImpl());
 		scrollPane.setViewportView(comboComunidades);
+		
+		
 		
 		
 		
