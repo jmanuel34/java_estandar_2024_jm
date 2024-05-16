@@ -22,7 +22,9 @@ class CuentasDaoImpl implements CuentasDao {
 			ps.setInt(1, idCuenta);
 			ResultSet rs = ps.executeQuery();
 			if (rs.next()) {
-				return new Cuenta(rs.getInt("numeroCuenta"), rs.getDouble("saldo"), rs.getString("tipocuenta"));
+				return new Cuenta(rs.getInt("numeroCuenta"), 
+						rs.getDouble("saldo"), 
+						rs.getString("tipocuenta"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

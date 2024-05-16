@@ -96,5 +96,9 @@ class CajeroServiceImpl implements CajeroService {
 		Cuenta cuenta=cuentasDao.findById(idCuenta);
 		return cuenta!=null?cuenta.getSaldo():0;
 	}
+	@Override
+	public boolean save(Cliente cliente) {
+		return clientesDao.save(cliente);
+	}
 
 }

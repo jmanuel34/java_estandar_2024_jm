@@ -23,7 +23,9 @@ class ClientesDaoImpl implements ClientesDao {
 			st.setInt(1, idCuenta);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
-				clientes.add(new Cliente(rs.getInt("dni"), rs.getString("nombre"), rs.getString("direccion"),
+				clientes.add(new Cliente(rs.getInt("dni"), 
+						rs.getString("nombre"), 
+						rs.getString("direccion"),
 						rs.getInt("telefono")));
 			}
 		} catch (SQLException e) {

@@ -87,7 +87,8 @@ class CajeroServiceImpl implements CajeroService {
 	@Override
 	public double obtenerSaldo(int idCuenta) {
 		Cuenta cuenta = cuentasDao.findById(idCuenta);
-		return cuenta!=null?cuenta.getSaldo():0;
+		
+		return cuenta!=null?cuenta.  getSaldo():0;
 	}
 
 

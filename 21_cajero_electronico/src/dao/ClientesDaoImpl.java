@@ -33,5 +33,22 @@ class ClientesDaoImpl implements ClientesDao {
 			}
 			return lista;	
 	}
+	
+	@Override
+	public boolean save(Cliente cliente) {
+		try (Connection con = LocatorConnection.getConnection()) {
+			String sql = "INSERT INTO clientes () VALUES (?,?,?,?)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, cliente.getDni());
+			ps.setString(2, cliente.getNombre());
+			ps.setString(3, cliente.getDireccion());
+			ps.setInt(4, cliente.getTelefono());
+			ps.execute();
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return false;
+	}
 
 }
