@@ -49,7 +49,7 @@ public class TableModelMunicipiosImpl extends AbstractTableModel {
 		return switch(columnIndex) {
 			case 0->String.class;
 			case 1->String.class;
-			case 2->String.class;
+			case 2->Integer.class;
 			case 3->Integer.class;
 			case 4->Double.class;		
 			default->String.class;

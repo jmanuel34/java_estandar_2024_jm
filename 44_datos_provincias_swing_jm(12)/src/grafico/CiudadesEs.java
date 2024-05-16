@@ -1,10 +1,14 @@
 package grafico;
 
 import java.awt.EventQueue;
+import java.awt.Font;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalTime;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -13,6 +17,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 import adaptadores.ComboBoxModelComunidadesImpl;
@@ -46,8 +51,9 @@ public class CiudadesEs extends JFrame {
 	 * Create the frame.
 	 */
 	public CiudadesEs() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, 501, 400);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -77,7 +83,7 @@ public class CiudadesEs extends JFrame {
 		scrollProvincias.setViewportView(tableProvincias);
 		
 		JScrollPane scrollMunicipios = new JScrollPane();
-		scrollMunicipios.setBounds(40, 177, 377, 89);
+		scrollMunicipios.setBounds(40, 177, 377, 150);
 		contentPane.add(scrollMunicipios);
 		
 		tableMunicipios = new JTable();
@@ -109,7 +115,7 @@ public class CiudadesEs extends JFrame {
 		
 		scrollProvincias.setViewportView(tableProvincias);
 		
-		JComboBox comboComunidades = new JComboBox();
+		JComboBox<String> comboComunidades = new JComboBox<>();
 		comboComunidades.addItemListener(new ItemListener() {
 			public void itemStateChanged(ItemEvent e) {			
 				if (e.getStateChange() == ItemEvent.SELECTED) {
@@ -118,6 +124,8 @@ public class CiudadesEs extends JFrame {
 					//y lo volcamos en JTable
 					var adaptador=new TableModelProvinciasImpl(seleccionado);
 					tableProvincias.setModel((TableModel) adaptador);
+					// Para borrar la table municipios de selecciones previas
+					tableMunicipios.setModel(new DefaultTableModel());
 				}				
 			}
 		});
@@ -126,9 +134,19 @@ public class CiudadesEs extends JFrame {
 		comboComunidades.setModel(new ComboBoxModelComunidadesImpl());
 		scrollPane.setViewportView(comboComunidades);
 		
+		JLabel lblReloj = new JLabel("");
+		lblReloj.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblReloj.setBounds(371, 11, 104, 20);
+		contentPane.add(lblReloj);
 		
-		// Cambio simple
-		
-		
+		// Hilo reloj
+/*		ExecutorService service= new Executors.newCachedThreadPool();
+				service.submit(()->{
+					LocalTime hora = LocalTime.now();
+					lblReloj.setText(hora.toString());
+					Thread.sleep(500);
+		});
+		service.shutdown();
+//*/		
 	}
 }
