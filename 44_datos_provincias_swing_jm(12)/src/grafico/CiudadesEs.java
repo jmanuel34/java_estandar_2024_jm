@@ -55,7 +55,7 @@ public class CiudadesEs extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblComunidad = new JLabel("Seleccionar Comunidad");
-		lblComunidad.setBounds(151, 11, 153, 14);
+		lblComunidad.setBounds(40, 17, 153, 14);
 		contentPane.add(lblComunidad);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -64,18 +64,34 @@ public class CiudadesEs extends JFrame {
 		
 		
 		
-		JScrollPane scrollPane_1 = new JScrollPane();
+		JScrollPane scrollProvincias = new JScrollPane();
 		tableProvincias = new JTable();
-		scrollPane_1.setViewportView(tableProvincias);
+		tableProvincias.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String provinciaSelected = (String) tableProvincias.getValueAt(tableProvincias.getSelectedRow() , 0);
+				var adaptadorMunicipios = new TableModelMunicipiosImpl(provinciaSelected);
+				tableMunicipios.setModel(adaptadorMunicipios);
+			}
+		});
+		scrollProvincias.setViewportView(tableProvincias);
 		
-		JScrollPane scrollPane_2 = new JScrollPane();
-		scrollPane_2.setBounds(40, 177, 377, 89);
-		contentPane.add(scrollPane_2);
+		JScrollPane scrollMunicipios = new JScrollPane();
+		scrollMunicipios.setBounds(40, 177, 377, 89);
+		contentPane.add(scrollMunicipios);
 		
 		tableMunicipios = new JTable();
-		scrollPane_2.setViewportView(tableMunicipios);
+		tableMunicipios.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		scrollMunicipios.setViewportView(tableMunicipios);
+
+//*	
 		
-		scrollPane_1.addMouseListener(new MouseAdapter() {
+		
+		scrollProvincias.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
 			
@@ -86,11 +102,12 @@ public class CiudadesEs extends JFrame {
 				
 			}
 		});
-		scrollPane_1.setBounds(40, 93, 377, 69);
-		contentPane.add(scrollPane_1);
+//*/
+		scrollProvincias.setBounds(40, 93, 377, 69);
+		contentPane.add(scrollProvincias);
 		
 		
-		scrollPane_1.setViewportView(tableProvincias);
+		scrollProvincias.setViewportView(tableProvincias);
 		
 		JComboBox comboComunidades = new JComboBox();
 		comboComunidades.addItemListener(new ItemListener() {
