@@ -1,6 +1,6 @@
 package service;
 
-public class CajeroServiceFactoy {
+public class CajeroServiceFactory {
 	
 	public static CajeroService getCajeroService() {
 		return new CajeroServiceImpl();

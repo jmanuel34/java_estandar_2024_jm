@@ -21,5 +21,8 @@ public interface ComunidadesDao {
 	
 	static ComunidadesDao of() {
 		return new ComunidadesDaoImpl();
+		
 	}
+	// Codigo de pruebas
+//	int print(); 
 }

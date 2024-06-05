@@ -13,6 +13,8 @@ import javax.swing.border.EmptyBorder;
 import model.Cuenta;
 import service.CajeroService;
 import service.CajeroServiceFactory;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Banca extends JFrame {
 
@@ -51,6 +53,18 @@ public class Banca extends JFrame {
 		contentPane.setLayout(null);
 		
 		textField = new JTextField();
+		textField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Integer id = Integer.parseInt( textField.getText());
+				 Cuenta cuenta =  service.obtenerCuenta(id);
+				 System.out.println("He llegado");
+				 new JFrameCuenta(cuenta);
+				 
+				 
+				
+			}
+		});
+/*
 		textField.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyTyped(KeyEvent e) {
@@ -58,13 +72,14 @@ public class Banca extends JFrame {
 				 if(e.getKeyCode() == KeyEvent.VK_ENTER) {
 					 Cuenta cuenta =  service.obtenerCuenta(id);
 					 
-					 /* 
-					  * Crear nueva ventana con datos de la cuenta
-					  */
+					  
+					  // Crear nueva ventana con datos de la cuenta
+					  
 					 
 				 }
 			}
 		});
+//*/
 		textField.setBounds(167, 66, 161, 26);
 		contentPane.add(textField);
 		textField.setColumns(10);
