@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
@@ -57,11 +58,15 @@ public class Banca extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Integer id = Integer.parseInt( textField.getText());
 				 Cuenta cuenta =  service.obtenerCuenta(id);
-				 System.out.println("He llegado");
-				 new JFrameCuenta(cuenta);
-				 
-				 
-				
+				 String mensaje;
+				 if (cuenta!=null) {
+					 mensaje = ("Cuenta existe");
+					 new JFrameCuenta(cuenta);
+					 
+				 } else { 
+					 mensaje = "Cuenta no existe";
+				 }
+				 JOptionPane.showMessageDialog(Banca.this, mensaje); 
 			}
 		});
 /*

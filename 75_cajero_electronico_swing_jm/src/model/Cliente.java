@@ -58,6 +58,8 @@ public class Cliente {
 		this.telefono = telefono;
 	}
 	
-	
+	public String toString() {
+		return this.dni+ " "+ this.nombre;
+	}
 
 }

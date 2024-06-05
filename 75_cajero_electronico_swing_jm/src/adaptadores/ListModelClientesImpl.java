@@ -8,7 +8,7 @@ import model.Cliente;
 import model.Titular;
 import service.CajeroServiceFactory;
 
-public class ListModelClientesImpl extends DefaultListModel<Titular> {
+public class ListModelClientesImpl extends DefaultListModel<Cliente> {
 	List<Cliente> titulares;
 
 	public ListModelClientesImpl(int idCuenta) {
@@ -22,9 +22,9 @@ public class ListModelClientesImpl extends DefaultListModel<Titular> {
 	}
 
 	@Override
-	public Titular getElementAt(int index) {
-//		return titulares.get(index);
-		return new Titular();
+	public Cliente getElementAt(int index) {
+		return titulares.get(index);
+//		return new Cliente();
 	}
 	
 }
